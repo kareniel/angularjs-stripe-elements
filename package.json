@@ -1,0 +1,32 @@
+{
+  "name": "angularjs-stripe-element",
+  "version": "0.1.0",
+  "description": "angularjs wrapper around stripe elements",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard --fix"
+  },
+  "peerDependencies": {
+    "angular": ">= 1.5.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kareniel/angularjs-stripe-element.git"
+  },
+  "keywords": [
+    "angularjs",
+    "angular.js",
+    "stripe.js",
+    "stripe",
+    "elements"
+  ],
+  "author": "kareniel",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kareniel/angularjs-stripe-element/issues"
+  },
+  "homepage": "https://github.com/kareniel/angularjs-stripe-element#readme",
+  "devDependencies": {
+    "standard": "^10.0.3"
+  }
+}
