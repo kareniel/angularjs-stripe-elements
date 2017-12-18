@@ -7,10 +7,10 @@
 
   angular
     .module('angularjs-stripe-elements', [])
-    .provider('$stripeElementProvider', stripeElementProvider)
-    .component('stripeElementComponent', stripeElementComponent())
+    .provider('$stripeElementsProvider', stripeElementsProvider)
+    .component('stripeElementsComponent', stripeElementsComponent())
 
-  function stripeElementProvider () {
+  function stripeElementsProvider () {
     this.apiKey = null
     this.cardElementId = '#card-element'
     this.errorsElementId = '#card-errors'
@@ -24,7 +24,7 @@
     }
   }
 
-  function stripeElementComponent () {
+  function stripeElementsComponent () {
     var bindings = {
       options: '<'
     }
@@ -37,12 +37,12 @@
 
     return {
       template: '<div></div>',
-      controller: StripeElementController,
+      controller: StripeElementsController,
       bindings: bindings
     }
   }
 
-  function StripeElementController ($element, $stripeElementProvider) {
+  function StripeElementsController ($element, $stripeElementProvider) {
     var ctrl = this
 
     ctrl.card = null
