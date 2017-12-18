@@ -1,5 +1,7 @@
 # angularjs-stripe-element
 
+[![npm version](https://badge.fury.io/js/angularjs-stripe-elements.svg)](https://badge.fury.io/js/angularjs-stripe-elements)
+
 Easily add Stripe Elements in your Angular.js apps.
 
 ## Usage
