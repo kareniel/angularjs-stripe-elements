@@ -40,10 +40,16 @@ angular.config(function ($stripeElementProvider) {
 
 ```
 
+Pass an options object the `options` attribute of the component.
+You can register a handler for every event that Stripe Elements supports in it's API.
+
 ```html
 <form ng-submit="$ctrl.handleSubmit" method="post" id="payment-form">
 
-  <stripe-element options="$ctrl.stripeElementOptions">
+  <stripe-element
+    options="$ctrl.stripeElementOptions"
+    on-change="$ctrl.handleChange"
+    on-blur="$ctrl.handleBlur">
     <!-- a Stripe Element will be inserted here. -->
   </stripe-element>
 
