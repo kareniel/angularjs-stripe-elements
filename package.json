@@ -1,6 +1,6 @@
 {
   "name": "angularjs-stripe-elements",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "angularjs wrapper around stripe elements",
   "main": "index.js",
   "scripts": {

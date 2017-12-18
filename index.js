@@ -3,77 +3,48 @@
 (function () {
   'use strict'
 
-  var possibleEvents = ['ready', 'change', 'click', 'focus', 'blur']
-
   angular
     .module('angularjs-stripe-elements', [])
-    .provider('stripeElements', stripeElementsProvider)
-    .component('stripeElementsComponent', stripeElementsComponent())
+    .provider('StripeElements', StripeElementsProvider)
+    .directive('stripeElementDecorator', stripeElementDecorator)
+    .component('stripeElement', getStripeElementComponent())
 
-  function stripeElementsProvider () {
+  function StripeElementsProvider () {
     this.apiKey = null
-    this.cardElementId = '#card-element'
-    this.errorsElementId = '#card-errors'
 
     this.setAPIKey = function (apiKey) {
       this.apiKey = apiKey
     }
 
     this.$get = function () {
-      return this
+      return Stripe(this.apiKey)
     }
   }
 
-  function stripeElementsComponent () {
-    var bindings = {
-      options: '<'
-    }
-
-    for (var i = 0; i < possibleEvents.length; i++) {
-      var eventName = possibleEvents[i]
-      var handlerName = getHandlerName(eventName)
-      bindings[handlerName] = '&'
-    }
-
+  function stripeElementDecorator () {
     return {
-      template: '<div></div>',
-      controller: StripeElementsController,
-      bindings: bindings
-    }
-  }
-
-  function StripeElementsController ($element, $stripeElementProvider) {
-    var ctrl = this
-
-    ctrl.card = null
-
-    ctrl.getCard = function () {
-      return this
+      restrict: 'A',
+      link: link
     }
 
-    ctrl.$postLink = function () {
-      var stripe = Stripe($stripeElementProvider.apiKey)
-      var elements = stripe.elements()
+    function link ($scope, $element, $attr) {
+      var $ctrl = $scope.$ctrl
 
-      ctrl.card = elements.create('card', ctrl.options)
-
-      ctrl.card.mount($element[0])
-
-      possibleEvents.map(function (eventName) {
-        ctrl.card.on(eventName, function (e) {
-          var fnName = getHandlerName(eventName)
-          var fn = ctrl[fnName]
-          if (fn && angular.isFunction(fn)) fn(e)
-        })
+      $scope.$on('$destroy', function () {
+        $ctrl.instance.destroy()
       })
-    }
 
-    ctrl.$onDestroy = function () {
-      ctrl.card.destroy()
+      $ctrl.instance.mount($element[0])
     }
   }
 
-  function getHandlerName (eventName) {
-    return 'on' + eventName.charAt(0).toUpperCase() + eventName.slice(1)
+  function getStripeElementComponent () {
+    return {
+      template: '<div stripe-element-decorator></div>',
+      controller: function () {},
+      bindings: {
+        instance: '<'
+      }
+    }
   }
 })()
