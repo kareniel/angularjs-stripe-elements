@@ -28,20 +28,25 @@ npm install --save angularjs-stripe-elements
 import angular from 'angular'
 import 'angularjs-stripe-elements'
 
-// Add as a dependency of your app:
+```
 
+Add as a dependency of your app:
+
+```js
 angular.module('myApp', [ 'angularjs-stripe-elements'])
-
-// Configure the provider
-
-angular.config(function ($stripeElementProvider) {
-  $stripeElementProvider.setAPIKey(STRIPE_API_PUBLISHABLE_KEY)
-})
 
 ```
 
+Configure the provider:
+
+```js
+angular.config(function ($stripeElementProvider) {
+  $stripeElementProvider.setAPIKey(STRIPE_API_PUBLISHABLE_KEY)
+})
+```
+
 Pass an options object the `options` attribute of the component.
-You can register a handler for every event that Stripe Elements supports in it's API.
+You can also register a handler for every event that Stripe Elements supports in it's API.
 
 ```html
 <form ng-submit="$ctrl.handleSubmit" method="post" id="payment-form">

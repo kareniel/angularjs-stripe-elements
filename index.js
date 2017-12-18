@@ -7,7 +7,7 @@
 
   angular
     .module('angularjs-stripe-elements', [])
-    .provider('$stripeElementsProvider', stripeElementsProvider)
+    .provider('stripeElements', stripeElementsProvider)
     .component('stripeElementsComponent', stripeElementsComponent())
 
   function stripeElementsProvider () {
