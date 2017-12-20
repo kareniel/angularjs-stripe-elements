@@ -12,7 +12,7 @@ Easily add Stripe Elements in your Angular.js apps.
 npm install --save angularjs-stripe-elements
 ```
 
-### Include the Stripe.js script in your index.html
+#### Include the Stripe.js script in your index.html
 
 ```html
 <script src="https://js.stripe.com/v3/"></script>
