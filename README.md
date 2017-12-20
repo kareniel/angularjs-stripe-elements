@@ -53,7 +53,7 @@ function MyCtrl (StripeElements) {
   this.element = element
 
   function handleChange (e) {
-    this.cardErrors = e.error ? e.error.message || ''
+    this.cardErrors = e.error ? e.error.message : ''
   }
 }
 ```
