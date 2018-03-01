@@ -45,6 +45,11 @@ angular.config(function (StripeElementsProvider) {
 It's a configured instance of [the Stripe object](https://stripe.com/docs/stripe-js/reference#the-stripe-object).
 
 ```js
+var component = {
+  templateUrl: 'templates/payment-form.html',
+  controller: MyCtrl
+}
+
 function MyCtrl (StripeElements) {
   var elements = StripeElements.elements()
   var element = elements.create('card', {})
