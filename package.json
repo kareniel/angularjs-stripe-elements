@@ -4,7 +4,8 @@
   "description": "angularjs wrapper around stripe elements",
   "main": "index.js",
   "scripts": {
-    "test": "standard --fix"
+    "test": "standard --fix",
+    "start": "budo example/index.js:bundle.js --live --dir example --ssl -- -t [ envify ]"
   },
   "peerDependencies": {
     "angular": ">= 1.5.3"
@@ -27,6 +28,9 @@
   },
   "homepage": "https://github.com/kareniel/angularjs-stripe-elements#readme",
   "devDependencies": {
+    "angular": "^1.6.9",
+    "budo": "^11.1.7",
+    "envify": "^4.1.0",
     "standard": "^10.0.3"
   }
 }
