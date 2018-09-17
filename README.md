@@ -61,6 +61,18 @@ function MyCtrl (StripeElements) {
   function handleChange (e) {
     this.cardErrors = e.error ? e.error.message : ''
   }
+    
+  ctrl.handleSubmit = function($event) {
+		console.log(ctrl.product);
+		StripeElements.createToken(element).then(function(result) {
+			if (result.error) {
+				ctrl.cardErrors = result.error.message;
+			} else {
+				// Send the token to your server.
+				console.log(result);
+			}
+		});
+	};
 }
 ```
 
