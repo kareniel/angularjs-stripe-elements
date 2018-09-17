@@ -31,6 +31,18 @@ function PaymentForm (StripeElements) {
   function handleChange (e) {
     ctrl.cardErrors = e.error ? e.error.message : ''
   }
+  
+  ctrl.handleSubmit = function($event) {
+		console.log(ctrl.product);
+		StripeElements.createToken(element).then(function(result) {
+			if (result.error) {
+				ctrl.cardErrors = result.error.message;
+			} else {
+				// Send the token to your server.
+				console.log(result);
+			}
+		});
+	};
 }
 
 var doc = angular.element(document)
