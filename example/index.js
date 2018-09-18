@@ -8,13 +8,13 @@ angular.module('example', [ 'angularjs-stripe-elements' ])
   .component('paymentForm', {
     controller: PaymentForm,
     template: `
-      <form ng-submit="$ctrl.handleSubmit" method="post" id="payment-form">
+      <form id="payment-form" ng-submit="$ctrl.handleSubmit" method="post">
 
         <stripe-element instance="$ctrl.element"></stripe-element>
 
         <div id="card-errors" role="alert">{{$ctrl.cardErrors}}</div>
 
-        <button>Submit Payment</button>
+        <input type="submit" value="Submit Payment">
       </form>`
   })
 
@@ -27,22 +27,22 @@ function PaymentForm (StripeElements) {
   element.on('change', handleChange)
 
   ctrl.element = element
+  ctrl.handleSubmit = handleSubmit
 
   function handleChange (e) {
     ctrl.cardErrors = e.error ? e.error.message : ''
   }
-  
-  ctrl.handleSubmit = function($event) {
-		console.log(ctrl.product);
-		StripeElements.createToken(element).then(function(result) {
-			if (result.error) {
-				ctrl.cardErrors = result.error.message;
-			} else {
-				// Send the token to your server.
-				console.log(result);
-			}
-		});
-	};
+
+  function handleSubmit ($event) {
+    StripeElements.createToken(element).then(function (result) {
+      if (result.error) {
+        ctrl.cardErrors = result.error.message
+      } else {
+        // Send the token to your server.
+        console.log(result)
+      }
+    })
+  }
 }
 
 var doc = angular.element(document)
