@@ -61,25 +61,13 @@ function MyCtrl (StripeElements) {
   function handleChange (e) {
     this.cardErrors = e.error ? e.error.message : ''
   }
-    
-  ctrl.handleSubmit = function($event) {
-		console.log(ctrl.product);
-		StripeElements.createToken(element).then(function(result) {
-			if (result.error) {
-				ctrl.cardErrors = result.error.message;
-			} else {
-				// Send the token to your server.
-				console.log(result);
-			}
-		});
-	};
 }
 ```
 
 #### Add a `stripe-element` element to your template and pass it your Element instance
 
 ```html
-<form ng-submit="$ctrl.handleSubmit" method="post" id="payment-form">
+<form method="post" id="payment-form">
 
   <stripe-element instance="$ctrl.element">
     <!-- a Stripe Element will be inserted here. -->
@@ -91,3 +79,26 @@ function MyCtrl (StripeElements) {
   <button>Submit Payment</button>
 </form>
 ```
+
+#### Make sure to handle the submission of the form inside your controller
+
+```html
+<form ng-submit="$ctrl.handleSubmit" method="post" id="payment-form">
+...
+</form
+```
+
+```js
+ctrl.handleSubmit = function () {
+  StripeElements.createToken(ctrl.element).then(function (result) {
+    if (result.error) {
+      ctrl.cardErrors = result.error.message
+    } else {
+      // Send the token to your server.
+      console.log(result)
+    }
+  })
+}
+
+```
+
